@@ -1,19 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import SplashScreen from 'react-native-splash-screen';
+import AllProductsScreen from './components/AllProductsScreen';
+import SingleProductScreen from './components/SingleProductScreen';
+import HomeScreen from './components/HomeScreen';
 
-export default function App() {
+
+const Stack = createStackNavigator();
+
+function App() {
+  useEffect(()=>{
+    // SplashScreen.hide();
+  },[]);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name='AllProducts' component={AllProductsScreen} />
+        <Stack.Screen name='SingleProduct' component={SingleProductScreen} />
+        <Stack.Screen name='Home' component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
